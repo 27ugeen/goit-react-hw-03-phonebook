@@ -45,16 +45,16 @@ export default class App extends Component {
 
       if (contacts.some(({ name }) => name === contactName)) {
         alert(`${contactName} is already in contacts`);
-      } else {
-        const newContact = {
-          id: uuid(),
-          name: contactName,
-          number,
-        };
-        return {
-          contacts: [...prevState.contacts, newContact],
-        };
+        return;
       }
+      const newContact = {
+        id: uuid(),
+        name: contactName,
+        number,
+      };
+      return {
+        contacts: [...prevState.contacts, newContact],
+      };
     });
   };
 
