@@ -39,33 +39,31 @@ export default class App extends Component {
     }
   }
 
-  addContact = (contactName, number) => {
-    this.setState(prevState => {
-      const { contacts } = prevState;
+  createContact = (name, number) => ({
+    id: uuid(),
+    name,
+    number,
+  });
 
-      if (contacts.some(({ name }) => name === contactName)) {
-        alert(`${contactName} is already in contacts`);
-        return;
-      }
-      const newContact = {
-        id: uuid(),
-        name: contactName,
-        number,
-      };
-      return {
-        contacts: [...prevState.contacts, newContact],
-      };
-    });
+  addContact = (newName, number) => {
+    const { contacts } = this.state;
+    if (
+      contacts.some(({ name }) => name.toLowerCase() === newName.toLowerCase())
+    ) {
+      alert(`${newName} is already in contacts`);
+      return;
+    }
+    const newContact = this.createContact(newName, number);
+
+    this.setState(prevState => ({
+      contacts: [...prevState.contacts, newContact],
+    }));
   };
 
   deleteContact = contactId => {
-    this.setState(prevState => {
-      const { contacts } = prevState;
-
-      return {
-        contacts: contacts.filter(({ id }) => id !== contactId),
-      };
-    });
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(({ id }) => id !== contactId),
+    }));
   };
 
   changeFilter = filter => {

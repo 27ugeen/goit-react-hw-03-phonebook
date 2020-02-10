@@ -5,11 +5,13 @@ import styles from './PhoneBook.module.css';
 
 const { form, inputLabel, input, formButton } = styles;
 
+const INIT_STATE = {
+  name: '',
+  number: '',
+};
+
 export default class PhoneBook extends Component {
-  static defaultProps = {
-    name: '',
-    number: '',
-  };
+  static defaultProps = { ...INIT_STATE };
 
   static propTypes = {
     name: PropTypes.string.isRequired,
@@ -34,23 +36,31 @@ export default class PhoneBook extends Component {
 
     const { name, number } = this.state;
 
+    if (!isNaN(+name)) {
+      alert('Enter valid Name');
+      return;
+    }
+
+    if (isNaN(+number)) {
+      alert('Enter valid Number');
+      return;
+    }
+
     this.props.onAddContact(name, number);
 
-    this.setState({
-      name: '',
-      number: '',
-    });
+    this.setState({ ...INIT_STATE });
   };
+
+  idName = shortid.generate();
+  idNumber = shortid.generate();
 
   render() {
     const { name, number } = this.state;
 
-    const idName = shortid.generate();
-    const idNummber = shortid.generate();
     return (
       <>
         <form className={form} onSubmit={this.handleSubmit}>
-          <label className={inputLabel} htmlFor={idName}>
+          <label className={inputLabel} htmlFor={this.idName}>
             Name
           </label>
           <input
@@ -60,10 +70,10 @@ export default class PhoneBook extends Component {
             value={name}
             onChange={this.handleInputChange}
             name="name"
-            id={idName}
+            id={this.idName}
             required
           />
-          <label className={inputLabel} htmlFor={idNummber}>
+          <label className={inputLabel} htmlFor={this.idNumber}>
             Number
           </label>
           <input
@@ -73,7 +83,7 @@ export default class PhoneBook extends Component {
             value={number}
             onChange={this.handleInputChange}
             name="number"
-            id={idNummber}
+            id={this.idNumber}
             required
           />
           <button type="submit" className={formButton}>
