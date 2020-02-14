@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Phonebook from './PhoneBook';
-import Contactlist from './ContactList';
+import ContactsList from './ContactsList';
 import ContactFilter from './ContactFilter';
 import Section from './Section';
 import Notification from './Notification';
@@ -93,7 +93,7 @@ export default class App extends Component {
           {contacts.length < 1 ? (
             <Notification message="There is no contact yet..." />
           ) : (
-            <Contactlist
+            <ContactsList
               contacts={filteredContacts}
               onDeleteContact={this.deleteContact}
             />

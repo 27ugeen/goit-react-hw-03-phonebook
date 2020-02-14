@@ -1,13 +1,13 @@
-.contactListItem {
+.contactsListItem {
   display: flex;
   justify-content: space-between;
 }
 
-.contactListItem:not(:last-child) {
+.contactsListItem:not(:last-child) {
   margin-bottom: 10px;
 }
 
-.contactListItem p {
+.contactsListItem p {
   font-size: 18px;
 }
 
