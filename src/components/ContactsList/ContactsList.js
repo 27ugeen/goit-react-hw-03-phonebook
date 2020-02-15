@@ -6,11 +6,16 @@ import styles from './ContactsList.module.css';
 const { contactsList } = styles;
 
 const ContactsList = ({ contacts, onDeleteContact }) => (
-  <>
-    <ul className={contactsList}>
-      <ContactsListItem contacts={contacts} onDeleteContact={onDeleteContact} />
-    </ul>
-  </>
+  <ul className={contactsList}>
+    {contacts.map(({ id, name, number }) => (
+      <ContactsListItem
+        key={id}
+        name={name}
+        number={number}
+        onDeleteContact={() => onDeleteContact(id)}
+      />
+    ))}
+  </ul>
 );
 
 ContactsList.propTypes = {

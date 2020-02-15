@@ -5,22 +5,11 @@ import ContactFilter from './ContactFilter';
 import Section from './Section';
 import Notification from './Notification';
 import { uuid } from 'uuidv4';
-import PropTypes from 'prop-types';
 
 export default class App extends Component {
-  static defaultProps = {
+  state = {
     contacts: [],
     filter: '',
-  };
-
-  static propTypes = {
-    contacts: PropTypes.array.isRequired,
-    filter: PropTypes.string.isRequired,
-  };
-
-  state = {
-    contacts: this.props.contacts,
-    filter: this.props.filter,
   };
 
   componentDidMount() {
